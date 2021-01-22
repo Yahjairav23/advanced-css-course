@@ -6,3 +6,177 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+/*
+    *{} : a universal selector that will apply this css to all of your site.
+*/
+* {
+    margin: 0;
+    padding: 0;
+    /*
+        browsers add a certain defaulting margin and padding
+    */
+    box-sizing: border-box;
+    /*
+        changes box settings so margin and padding is not added
+    */
+}
+
+body {
+    /* 
+        font is inherrited
+        all things about font should go in body
+    */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+
+    padding: 30px;
+}
+
+.header {
+    height: 95vh;
+    /*
+        vh is the percentage of the view point height that this will take up
+    */
+    background-image: linear-gradient(to right bottom, hsla(111, 55%, 64%, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+    /*
+        we have two background properties seperated my a comma, 
+        we want the gradient over the image so we put that first
+        the gradient: first arg specify which direction you want the gradient to go (to top, to bottom, to left, to right)
+        can also add two directions
+        next args are the colors used in the gradient.
+    */
+    background-size: cover;
+    background-position: top;
+    /*
+        this ensures the image always stays at the top of the container
+        if we change to bottom, the crops will occur at the top when view port changes,
+        middle will crop top and bottom
+    */
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
+    /*
+        this is how we got the slant look of the element.
+        we specify the points of our clip path(in our case, the four point of our polygon)
+        we specify the points using the x y cordinates. you can use any unit of measurement
+    */
+}
+
+.logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    /*
+        this top and left needs some parent element to reference to 
+        so we specify in the parent element that it is a reference element
+    */
+}
+
+.logo {
+    height: 35px;
+    /*
+        the width will be figured out by the browser
+    */
+}
+
+.text-box{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /*
+        top and left is related to the parent element
+    */
+    transform: translate(-50%, -50%);
+    /*
+        transform is related to the element itself
+        placing items at 50% will have everything off because it will begin in the middle of the parent element
+        but we use the transform translate to move the items -50% of the elements width to have proper middle placement 
+    */
+}
+
+.heading-primary {
+    color: #ffffff;
+    text-transform: uppercase;
+
+    backface-visibility: hidden;
+    /* 
+        this prevents the element from being shaky.
+        hides the back part of the element
+    */
+
+}
+
+/*
+    a block display makes something span the entire width and makes line breaks before and after
+*/
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+
+    animation-name: moveInLeft;
+    animation-duration: 2s;
+    
+    /*
+    animation-iteration-count: will repeat the animation the specified times;
+    animation-timing-function: specifies how the animation should progress over the duration of each cycle;
+    animation-delay: specify how long before animation begins;
+    */
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+
+    animation: moveInRight 2s;
+    /*
+        animation is the shorthand for:
+            animation-name: moveInRight;
+            animation-duration: 2s;
+    */
+}
+
+@keyframes moveInLeft {
+    0% {
+        /*before animation begins*/
+        opacity: 0;
+        transform: translateX(-100px);
+        /*translateX translates our animation from the left/right*/
+    }
+
+    80% {
+        transform: translateX(20px);
+    }
+
+    100% {
+        /*the final state of animation*/
+        opacity: 1;
+        transform: translate(0);
+        /*this gives us the original state without animation*/
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: -20px;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/*
+    to types of animations = transitions, keyframes
+*/
