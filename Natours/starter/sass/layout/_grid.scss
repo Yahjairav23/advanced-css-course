@@ -3,7 +3,6 @@
 .row {
     max-width: $grid-width;
     // if the viewport is less than 1140 px it will fill 100% of the viewport
-    background-color: burlywood;
     margin: 0 auto;
     // top and bottom will have no margin and the left and right margin will be even, making the element centered
 
@@ -21,7 +20,6 @@
         // "^" = "starts with"
         // "*" = "that contain"
         // $ = "ends with"
-        background-color: pink;
         float: left;
         &:not(:last-child) {
             margin-right: $gutter-horizontal;
