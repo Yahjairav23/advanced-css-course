@@ -1,276 +1,248 @@
 /*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-/*
     *{} : a universal selector that will apply this css to all of your site.
 */
-* {
-    margin: 0;
-    padding: 0;
-    /*
+*, *::after, *::before {
+  /* these are only inherited by the real elemnents 
+    so in order for the before and after sudo elements to get these behaviors, we have to specify*/
+  margin: 0;
+  padding: 0;
+  /*
         browsers add a certain defaulting margin and padding
     */
-    box-sizing: border-box;
-    /*
-        changes box settings so margin and padding is not added
-    */
-}
+  box-sizing: inherit;
+  /* this forces inheritance of box sizing */ }
+
+html {
+  /* font-size: 10px; */
+  /* it's not best practice to use pixels for fonts, so we can use percent
+    using percent also allows users to zoom or adjust sizing.
+    browsers typical default font size is 16, so can set the font to whatever percentage 10 is of 16 */
+  font-size: 62.5%; }
 
 body {
-    /* 
+  box-sizing: border-box;
+  /*
+        changes box settings so margin and padding is not added
+    */ }
+
+@keyframes moveInLeft {
+  0% {
+    /*before animation begins*/
+    opacity: 0;
+    transform: translateX(-10rem);
+    /*translateX translates our animation from the left/right*/ }
+  80% {
+    transform: translateX(0.2rem); }
+  100% {
+    /*the final state of animation*/
+    opacity: 1;
+    transform: translate(0);
+    /*this gives us the original state without animation*/ } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-0.2rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+/*
+    two types of animations = transitions, keyframes
+*/
+@keyframes moveInButton {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem); }
+  80% {
+    transform: translateY(-0.1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+body {
+  /* 
         font is inherrited
         all things about font should go in body
     */
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #777;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
 
-    padding: 30px;
-}
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  /* 
+        this prevents the element from being shaky.
+        hides the back part of the element
+    */
+  margin-bottom: 6rem;
+  /*
+    a block display makes something span the entire width and makes line breaks before and after
+    */ }
+  .heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: movecInLeft;
+    animation-duration: 2s;
+    /*
+        animation-iteration-count: will repeat the animation the specified times;
+        animation-timing-function: specifies how the animation should progress over the duration of each cycle;
+        animation-delay: specify how long before animation begins;
+        */ }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.74rem;
+    animation: moveInRight 2s;
+    /*
+            animation is the shorthand for:
+                animation-name: moveInRight;
+                animation-duration: 2s;
+        */ }
+
+.btn:link, .btn:visited {
+  /*when it is a link and when we have visited the link. 
+        so we have the same properties for each state*/
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  /* transition should be on the initial state */
+  position: relative; }
+
+.btn--animated {
+  animation: moveInButton 2s ease-out .7s;
+  animation-fill-mode: backwards;
+  /* animation fill mode will automatically apply the animations of the 0% before begining */ }
+
+.btn:hover {
+  /*when we hover over element*/
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  /* first number is shaddow along x axis, the shadow along y axis, then the blur of the shadow, then color */ }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    /* scale increases the sie of the property
+            scale 2 == double the size */
+    opacity: 0; }
+
+.btn:active {
+  /*active state means when we click*/
+  transform: translate(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn--white {
+  background-color: #fff;
+  color: #777; }
+  .btn--white::after {
+    background-color: #fff; }
+
+.btn::after {
+  /* content and display property must be specified in order to do anything */
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* z-index difines position of elements if they are one on top of another 
+        negative one means it is back one layer*/
+  transition: all .4s; }
 
 .header {
-    height: 95vh;
-    /*
+  height: 95vh;
+  /*
         vh is the percentage of the view point height that this will take up
     */
-    background-image: linear-gradient(to right bottom, hsla(111, 55%, 64%, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
-    /*
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  /*
         we have two background properties seperated my a comma, 
         we want the gradient over the image so we put that first
         the gradient: first arg specify which direction you want the gradient to go (to top, to bottom, to left, to right)
         can also add two directions
         next args are the colors used in the gradient.
     */
-    background-size: cover;
-    background-position: top;
-    /*
+  background-size: cover;
+  background-position: top;
+  /*
         this ensures the image always stays at the top of the container
         if we change to bottom, the crops will occur at the top when view port changes,
         middle will crop top and bottom
     */
-    position: relative;
-    clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
-    /*
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
+  /*
         this is how we got the slant look of the element.
         we specify the points of our clip path(in our case, the four point of our polygon)
         we specify the points using the x y cordinates. you can use any unit of measurement
-    */
-}
-
-.logo-box {
+    */ }
+  .header__logo-box {
     position: absolute;
-    top: 40px;
-    left: 40px;
+    top: 4rem;
+    left: 4rem;
     /*
         this top and left needs some parent element to reference to 
         so we specify in the parent element that it is a reference element
-    */
-}
-
-.logo {
-    height: 35px;
+    */ }
+  .header__logo {
+    height: 3.5rem;
     /*
-        the width will be figured out by the browser
-    */
-}
-
-.text-box{
+            the width will be figured out by the browser
+        */ }
+  .header__text-box {
     position: absolute;
     top: 40%;
     left: 50%;
     /*
-        top and left is related to the parent element
-    */
+            top and left is related to the parent element
+        */
     transform: translate(-50%, -50%);
     /*
-        transform is related to the element itself
-        placing items at 50% will have everything off because it will begin in the middle of the parent element
-        but we use the transform translate to move the items -50% of the elements width to have proper middle placement 
-    */
-    text-align: center;
-}
+            transform is related to the element itself
+            placing items at 50% will have everything off because it will begin in the middle of the parent element
+            but we use the transform translate to move the items -50% of the elements width to have proper middle placement 
+        */
+    text-align: center; }
 
-.heading-primary {
-    color: #ffffff;
-    text-transform: uppercase;
-
-    backface-visibility: hidden;
-    /* 
-        this prevents the element from being shaky.
-        hides the back part of the element
-    */
-    margin-bottom: 60px;
-}
-
-/*
-    a block display makes something span the entire width and makes line breaks before and after
-*/
-.heading-primary-main {
-    display: block;
-    font-size: 60px;
-    font-weight: 400;
-    letter-spacing: 35px;
-
-    animation-name: moveInLeft;
-    animation-duration: 2s;
-    
-    /*
-    animation-iteration-count: will repeat the animation the specified times;
-    animation-timing-function: specifies how the animation should progress over the duration of each cycle;
-    animation-delay: specify how long before animation begins;
-    */
-}
-
-.heading-primary-sub {
-    display: block;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 17.4px;
-
-    animation: moveInRight 2s;
-    /*
-        animation is the shorthand for:
-            animation-name: moveInRight;
-            animation-duration: 2s;
-    */
-}
-
-@keyframes moveInLeft {
-    0% {
-        /*before animation begins*/
-        opacity: 0;
-        transform: translateX(-100px);
-        /*translateX translates our animation from the left/right*/
-    }
-
-    80% {
-        transform: translateX(20px);
-    }
-
-    100% {
-        /*the final state of animation*/
-        opacity: 1;
-        transform: translate(0);
-        /*this gives us the original state without animation*/
-    }
-}
-
-@keyframes moveInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100px);
-    }
-
-    80% {
-        transform: -20px;
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(0);
-    }
-}
-
-/*
-    to types of animations = transitions, keyframes
-*/
-
-@keyframes moveInButton {
-    0% {
-        opacity: 0;
-        transform: translateY(100px);
-    }
-
-    80% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(0);
-    }
-}
-
-.btn:link, .btn:visited {
-    /*when it is a link and when we have visited the link. 
-    so we have the same properties for each state*/
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 15px 40px;
-    display: inline-block;
-    border-radius: 100px;
-    transition: all .2s ;
-    /* transition should be on the initial state */
-    position: relative;
-    
-}
-
-.btn-animated {
-    animation: moveInButton 2s ease-out .7s;
-    animation-fill-mode: backwards;
-    /* animation fill mode will automatically apply the animations of the 0% before begining */
-}
-
-.btn:hover {
-    /*when we hover over element*/
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
-    /* first number is shaddow along x axis, the shadow along y axis, then the blur of the shadow, then color */
-
-}
-
-.btn:active {
-    /*active state means when we click*/
-    transform: translate(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-}
-
-.btn-white {
-    background-color: white;
-    color: #777;
-}
-
-.btn::after {
-    /* content and display property must be specified in order to do anything */
+.row {
+  max-width: 114rem;
+  background-color: burlywood;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
     content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    /* z-index difines position of elements if they are one on top of another 
-    negative one means it is back one layer*/
-    transition: all .4s;
-}
-
-.btn::after {
-    background-color: #fff;
-}
-
-.btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    /* scale increases the sie of the property
-    scale 2 == double the size */
-    opacity: 0;
-}
-
-
-/* 
-    responsive design - works the same across all devices
-    maintainable and scalable code - write code that is clean and easier to understand that is reusable
-    web perfmance - making it faster and smaller in size. small http requests as possible
-
-    
-
-
-*/
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    background-color: pink;
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - (6rem * 2)) / 3); }
+  .row .col-2-of-3 {
+    width: calc(2 * ((100% - (6rem * 2)) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - (6rem * 3)) / 4); }
+  .row .col-2-of-4 {
+    width: calc(2 * ((100% - (6rem * 3)) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc(3 * ((100% - (6rem * 3)) / 4) + (6rem * 2)); }

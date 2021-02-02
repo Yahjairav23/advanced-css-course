@@ -1,0 +1,34 @@
+@import "../abstracts/variables";
+
+/*
+    *{} : a universal selector that will apply this css to all of your site.
+*/
+
+
+*, *::after, *::before {
+    /* these are only inherited by the real elemnents 
+    so in order for the before and after sudo elements to get these behaviors, we have to specify*/
+    margin: 0;
+    padding: 0;
+    /*
+        browsers add a certain defaulting margin and padding
+    */
+    box-sizing: inherit;
+    /* this forces inheritance of box sizing */
+}
+
+html {
+    /* font-size: 10px; */
+    /* it's not best practice to use pixels for fonts, so we can use percent
+    using percent also allows users to zoom or adjust sizing.
+    browsers typical default font size is 16, so can set the font to whatever percentage 10 is of 16 */
+    font-size: 62.5%;
+    // this defines what one rem should be
+}
+
+body {
+    box-sizing: border-box;
+    /*
+        changes box settings so margin and padding is not added
+    */
+}

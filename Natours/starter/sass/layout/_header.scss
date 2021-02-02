@@ -1,0 +1,61 @@
+.header {
+    height: 95vh;
+    /*
+        vh is the percentage of the view point height that this will take up
+    */
+    background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url(../img/hero.jpg);
+    /*
+        we have two background properties seperated my a comma, 
+        we want the gradient over the image so we put that first
+        the gradient: first arg specify which direction you want the gradient to go (to top, to bottom, to left, to right)
+        can also add two directions
+        next args are the colors used in the gradient.
+    */
+    background-size: cover;
+    background-position: top;
+    /*
+        this ensures the image always stays at the top of the container
+        if we change to bottom, the crops will occur at the top when view port changes,
+        middle will crop top and bottom
+    */
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
+    /*
+        this is how we got the slant look of the element.
+        we specify the points of our clip path(in our case, the four point of our polygon)
+        we specify the points using the x y cordinates. you can use any unit of measurement
+    */
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+         /*
+        this top and left needs some parent element to reference to 
+        so we specify in the parent element that it is a reference element
+    */
+    }
+
+    &__logo {
+        height: 3.5rem;
+        /*
+            the width will be figured out by the browser
+        */
+    }
+    
+    &__text-box{
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        /*
+            top and left is related to the parent element
+        */
+        transform: translate(-50%, -50%);
+        /*
+            transform is related to the element itself
+            placing items at 50% will have everything off because it will begin in the middle of the parent element
+            but we use the transform translate to move the items -50% of the elements width to have proper middle placement 
+        */
+        text-align: center;
+    }
+}

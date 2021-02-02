@@ -1,0 +1,70 @@
+.btn{
+    &:link, &:visited {
+        /*when it is a link and when we have visited the link. 
+        so we have the same properties for each state*/
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s ;
+        /* transition should be on the initial state */
+        position: relative;
+        
+    }
+
+    &--animated {
+        animation: moveInButton 2s ease-out .7s;
+        animation-fill-mode: backwards;
+        /* animation fill mode will automatically apply the animations of the 0% before begining */
+    }
+
+    &:hover {
+        /*when we hover over element*/
+        transform: translateY(-.3rem);
+        box-shadow: 0 1rem 2rem rgba($color-black, .2);
+        /* first number is shaddow along x axis, the shadow along y axis, then the blur of the shadow, then color */
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            /* scale increases the sie of the property
+            scale 2 == double the size */
+            opacity: 0;
+        }
+    }
+
+    &:active {
+        /*active state means when we click*/
+        transform: translate(-.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black, .2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &::after {
+        /* content and display property must be specified in order to do anything */
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        /* z-index difines position of elements if they are one on top of another 
+        negative one means it is back one layer*/
+        transition: all .4s;
+    }
+
+    
+
+    
+}

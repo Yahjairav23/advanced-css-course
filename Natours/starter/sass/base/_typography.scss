@@ -1,0 +1,59 @@
+body {
+    /* 
+        font is inherrited
+        all things about font should go in body
+    */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: $color-grey-dark;
+
+    padding: 3rem;
+}
+
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+
+    backface-visibility: hidden;
+    /* 
+        this prevents the element from being shaky.
+        hides the back part of the element
+    */
+    margin-bottom: 6rem;
+
+    /*
+    a block display makes something span the entire width and makes line breaks before and after
+    */
+    &--main {
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+
+        animation-name: movecInLeft;
+        animation-duration: 2s;
+        
+        /*
+        animation-iteration-count: will repeat the animation the specified times;
+        animation-timing-function: specifies how the animation should progress over the duration of each cycle;
+        animation-delay: specify how long before animation begins;
+        */
+    }
+
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.74rem;
+
+        animation: moveInRight 2s;
+        /*
+            animation is the shorthand for:
+                animation-name: moveInRight;
+                animation-duration: 2s;
+        */
+    }
+
+}
